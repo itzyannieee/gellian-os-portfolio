@@ -3,11 +3,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const typingText = document.getElementById("typingText");
 
     if (typingText) {
-        const words = [
-            "Information Technology Student",
-            "Creative Learner",
-            "Future IT Professional"
-        ];
+        const words = (typingText.dataset.words || typingText.textContent).split('|').map(word => word.trim()).filter(Boolean);
+        if (!words.length) words.push('IT Student');
 
         let wordIndex = 0;
         let letterIndex = 0;
@@ -61,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const savedTheme =
         localStorage.getItem("gellianTheme");
 
-    if (savedTheme === "dark") {
+    if ((savedTheme || document.body.dataset.defaultTheme) === "dark") {
         document.body.classList.add("dark-mode");
 
         if (themeToggle) {
@@ -112,7 +109,7 @@ document.addEventListener("DOMContentLoaded", function () {
             linkPage === currentPage ||
             (
                 currentPage === "" &&
-                linkPage === "index.html"
+                linkPage === "index.php"
             )
         ) {
             link.classList.add("active");
@@ -191,111 +188,6 @@ document.addEventListener("DOMContentLoaded", function () {
         });
 
     });
-
-
-    const contactForm =
-        document.getElementById("contactForm");
-
-    if (contactForm) {
-
-        contactForm.addEventListener(
-            "submit",
-            function (event) {
-
-                event.preventDefault();
-
-                const name =
-                    document.getElementById("name");
-
-                const email =
-                    document.getElementById("email");
-
-                const message =
-                    document.getElementById("message");
-
-                const formMessage =
-                    document.getElementById("formMessage");
-
-                if (
-                    !name ||
-                    !email ||
-                    !message ||
-                    !formMessage
-                ) {
-                    return;
-                }
-
-                if (name.value.trim() === "") {
-
-                    formMessage.textContent =
-                        "Please enter your name.";
-
-                    formMessage.className =
-                        "form-error";
-
-                    name.focus();
-
-                    return;
-                }
-
-                if (email.value.trim() === "") {
-
-                    formMessage.textContent =
-                        "Please enter your email.";
-
-                    formMessage.className =
-                        "form-error";
-
-                    email.focus();
-
-                    return;
-                }
-
-                const emailPattern =
-                    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-                if (
-                    !emailPattern.test(
-                        email.value.trim()
-                    )
-                ) {
-
-                    formMessage.textContent =
-                        "Please enter a valid email address.";
-
-                    formMessage.className =
-                        "form-error";
-
-                    email.focus();
-
-                    return;
-                }
-
-                if (message.value.trim() === "") {
-
-                    formMessage.textContent =
-                        "Please enter your message.";
-
-                    formMessage.className =
-                        "form-error";
-
-                    message.focus();
-
-                    return;
-                }
-
-                formMessage.textContent =
-                    "Message checked successfully! Thank you for reaching out.";
-
-                formMessage.className =
-                    "form-success";
-
-                contactForm.reset();
-
-            }
-        );
-
-    }
 
 
     const projectImages =
@@ -420,6 +312,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     }
 
-    console.log("GELLiAN OS loaded successfully.");
+    
 
 });

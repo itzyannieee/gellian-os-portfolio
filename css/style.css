@@ -1186,3 +1186,5 @@ footer {
         align-items: flex-start;
     }
 }
+
+.multiline{white-space:pre-line}.trap{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}.award-image{max-width:100%;max-height:180px;object-fit:contain}.os-brand{min-width:0}.system-status{flex-shrink:0}
